@@ -19,6 +19,28 @@ module avail phylip
 module load phylip
 ```
 
+### Syncing modules
+
+To update modulefiles on the cluster:
+
+```bash
+cd /path/to/shared/Modules/
+git pull
+```
+
+Set up using:
+
+```bash
+cd /path/to/shared/Modules/
+git init
+git remote add origin https://github.com/fm-key-lab/env-modules.git
+git config core.sparseCheckout true
+echo "modulefiles/*" >> .git/info/sparse-checkout
+git fetch origin main
+git checkout -b main
+git branch --set-upstream-to=origin/main main
+```
+
 ## Useful
 
 [MPCDF docs](https://docs.mpcdf.mpg.de/doc/computing/software/environment-modules.html)
