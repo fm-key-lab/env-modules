@@ -1,0 +1,23 @@
+#%Module
+##
+## PHYLIP-3.697
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds PHYLIP (v3.697) tools to your path
+Version 1.0
+
+https://phylipweb.github.io/phylip/
+"
+}
+ 
+module-whatis "Adds PHYLIP tools to your path\n"
+module-whatis "Provides: dnapars"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/phylip/3.697"
+prepend-path LD_LIBRARY_PATH "${basedir}/phylip/3.697"
