@@ -41,6 +41,8 @@ git checkout -b main
 git branch --set-upstream-to=origin/main main
 ```
 
+Note that this set-up is temporary, to be replaced with the approach outlined [here](https://modules.readthedocs.io/en/latest/cookbook/modulefiles-in-git.html).
+
 ## Useful
 
 [MPCDF docs](https://docs.mpcdf.mpg.de/doc/computing/software/environment-modules.html)
