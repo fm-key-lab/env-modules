@@ -36,9 +36,8 @@ git init
 git remote add origin https://github.com/fm-key-lab/env-modules.git
 git config core.sparseCheckout true
 echo "modulefiles/*" >> .git/info/sparse-checkout
-git fetch origin main
-git checkout -b main
-git branch --set-upstream-to=origin/main main
+git fetch origin
+git branch --set-upstream-to=origin/main
 ```
 
 Note that this set-up is temporary, to be replaced with the approach outlined [here](https://modules.readthedocs.io/en/latest/cookbook/modulefiles-in-git.html).

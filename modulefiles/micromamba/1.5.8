@@ -4,11 +4,10 @@
 
 proc ModulesHelp { } {
    puts stderr "
-Adds micromamba to your path
-v 1.5
+Adds micromamba (version 1.5) to your path.
 "
 }
- 
+
 module-whatis "Adds micromamba to your path\n"
 module-whatis "Provides: micromamba"
 
@@ -27,6 +26,10 @@ prepend-path PATH "${basedir}/micromamba"
 if {![info exists env(MAMBA_ROOT_PREFIX)]} {
     setenv MAMBA_ROOT_PREFIX "$env(HOME)/micromamba"
 }
+
+# cat /mpcdf/soft/SLE_15/packages/x86_64/anaconda/3/2023.03/.condarc
+set key_conf "$env(GROUP_HOME)/etc/.condarc"
+setenv MAMBARC $key_conf
 
 # TODO: Consider hook parsing as implemented in /mpcdf/soft/SLE_15/modules/python/anaconda/3/2023.03
 # Evaluate shell hook
