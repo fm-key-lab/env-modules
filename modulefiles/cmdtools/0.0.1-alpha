@@ -17,4 +17,20 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
+
 prepend-path PATH "${basedir}/ncdu"
+
+set key_conf "$env(GROUP_HOME)/etc/ncdu.conf"
+set usr_conf "$env(HOME)/.config/ncdu/config"
+
+if {[module-info mode load]} {
+    if {![file exists $usr_conf]} {
+        exec ln -s $key_conf $usr_conf
+    }
+}
+
+if {[module-info mode unload]} {
+    if {[file islink $usr_conf]} {
+        exec rm -f $usr_conf
+    }
+}
