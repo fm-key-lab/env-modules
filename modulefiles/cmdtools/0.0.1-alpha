@@ -1,0 +1,20 @@
+#%Module
+##
+## command line tools
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds command line tools to your path
+Version 0.0.1-alpha
+"
+}
+ 
+module-whatis "Adds command line tools to your path\n"
+module-whatis "Provides: ncdu"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/ncdu"
