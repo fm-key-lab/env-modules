@@ -25,6 +25,7 @@ set usr_conf "$env(HOME)/.config/ncdu/config"
 
 if {[module-info mode load]} {
     if {![file exists $usr_conf]} {
+        exec mkdir -p "$env(HOME)/.config/ncdu"
         exec ln -s $key_conf $usr_conf
     }
 }
