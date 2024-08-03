@@ -23,7 +23,9 @@ if { $basedir eq "" } {
     exit 1
 }
 
-set root ${basedir}/python/3.12.4
+# NOTE: Note sure which to use ... `which python` v. `which python3.12`
+# set root ${basedir}/python/3.12.4
+set root ${basedir}/python
 
 prepend-path    PATH            $root/bin/
 prepend-path    LD_LIBRARY_PATH $root/lib64
