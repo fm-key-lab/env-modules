@@ -30,7 +30,7 @@ if {[module-info mode load]} {
 }
 
 if {[module-info mode unload]} {
-    if {[file islink $usr_conf]} {
+    if {[file exists $usr_conf] && [catch {file readlink $usr_conf} result] == 0} {
         exec rm -f $usr_conf
     }
 }
