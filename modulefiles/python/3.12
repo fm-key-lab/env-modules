@@ -12,9 +12,29 @@ Version 1.0
 module-whatis "Adds python3.12 to your path\n"
 module-whatis "Provides: python python3 python3.12 pip pip3 pip3.12"
 
+conflict anaconda
+conflict miniconda
+conflict micromamba
+conflict python-waterboa
+
 set basedir [getenv "MODULE_BASEDIR"]
 if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/python/3.12.4/bin/"
+
+set root ${basedir}/python/3.12.4
+
+prepend-path    PATH            $root/bin/
+prepend-path    LD_LIBRARY_PATH $root/lib64
+prepend-path    MANPATH         $root/share/man
+prepend-path    PATH            $root/bin
+prepend-path    PKG_CONFIG_PATH $root/lib64/pkgconfig
+prepend-path    XDG_DATA_DIRS   $root/share
+
+set key_conf "$env(GROUP_HOME)/etc/pip.conf"
+setenv PIP_CONFIG_FILE $key_conf
+
+if {[module-info mode unload]} {
+    unsetenv PIP_CONFIG_FILE
+}

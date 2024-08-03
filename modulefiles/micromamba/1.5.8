@@ -5,18 +5,22 @@
 proc ModulesHelp { } {
    puts stderr "
 Adds micromamba to your path
-Version 1.0
+v 1.5
 "
 }
  
 module-whatis "Adds micromamba to your path\n"
 module-whatis "Provides: micromamba"
 
+conflict anaconda
+conflict python
+
 set basedir [getenv "MODULE_BASEDIR"]
 if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
+
 prepend-path PATH "${basedir}/micromamba"
 
 # Set MAMBA_ROOT_PREFIX to default value if not already set
@@ -24,6 +28,7 @@ if {![info exists env(MAMBA_ROOT_PREFIX)]} {
     setenv MAMBA_ROOT_PREFIX "$env(HOME)/micromamba"
 }
 
+# TODO: Consider hook parsing as implemented in /mpcdf/soft/SLE_15/modules/python/anaconda/3/2023.03
 # Evaluate shell hook
 if {[info exists env(MODULESHOME)]} {
     catch { exec bash -c "eval \"\$(${basedir}/micromamba/bin/micromamba shell hook -s bash)\"" }
