@@ -1,0 +1,24 @@
+#%Module
+##
+## TinyTex-2024.07.03
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds TinyTex (v2024.07.03) tools to your path
+
+https://yihui.org/tinytex/
+https://github.com/rstudio/tinytex-releases
+https://github.com/James-Yu/LaTeX-Workshop
+"
+}
+ 
+module-whatis "Adds TinyTex tools to your path\n"
+module-whatis "Provides: latexmk pdflatex bibtex"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/tinytex/2024.07.03/bin/x86_64-linux/"
+prepend-path LD_LIBRARY_PATH "${basedir}/tinytex/2024.07.03/bin/x86_64-linux/"
