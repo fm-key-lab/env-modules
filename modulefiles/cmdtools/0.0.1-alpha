@@ -19,6 +19,8 @@ if { $basedir eq "" } {
 }
 
 prepend-path PATH "${basedir}/apps/ncdu"
+prepend-path PATH "${basedir}/neon/0.32.5/bin"
+prepend-path PATH "${basedir}/cadaver/0.24/bin"
 
 set key_conf "$env(GROUP_HOME)/etc/ncdu.conf"
 set usr_conf "$env(HOME)/.config/ncdu/config"
