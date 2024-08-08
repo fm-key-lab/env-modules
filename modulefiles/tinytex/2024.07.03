@@ -13,7 +13,7 @@ https://github.com/James-Yu/LaTeX-Workshop
 }
  
 module-whatis "Adds TinyTex tools to your path\n"
-module-whatis "Provides: latexmk pdflatex bibtex"
+module-whatis "Provides: latexmk pdflatex bibtex tlmgr"
 
 set basedir [getenv "MODULE_BASEDIR"]
 if { $basedir eq "" } {
