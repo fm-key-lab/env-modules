@@ -1,0 +1,20 @@
+#%Module
+##
+## Cutadapt (v4.9)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds Cutadapt to your path
+Version 4.9
+"
+}
+
+module-whatis "Adds Cutadapt to your path\n"
+module-whatis "Provides: Cutadapt"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/cutadapt/4.9/.venv/bin"
