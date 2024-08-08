@@ -1,10 +1,10 @@
 #%Module
 ##
-## RAxML-NG (v1.2.2)
+## RAxML-NG (v1.2.2_MPI)
 
 proc ModulesHelp { } {
    puts stderr "
-Adds RAxML-NG to your path
+Adds RAxML-NG with MPI support to your path
 Version 1.2.2
 "
 }
@@ -17,4 +17,4 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/raxml-ng/1.2.2/bin"
+prepend-path PATH "${basedir}/raxml-ng/1.2.2_MPI/bin"
