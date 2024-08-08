@@ -1,0 +1,28 @@
+#%Module
+##
+## snakemake (v8.16.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds snakemake to your path.
+Version 8.16.0
+"
+}
+
+module-whatis "Adds snakemake to your path\n"
+module-whatis "Provides: snakemake, snakemake-executor-plugin-slurm, snakemake-wrapper-utils, snakefmt, snakedeploy"
+
+# TODO: Implement strategy for loading `[micro]mamba` or `[ana]conda` module as described here
+#       https://modules.readthedocs.io/en/latest/cookbook/compiler-etc-dependencies.html#
+#       
+#       Then add these conflicts:
+#           conflict anaconda
+#           conflict python
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+prepend-path PATH "${basedir}/snakemake/8.16.0/bin"
