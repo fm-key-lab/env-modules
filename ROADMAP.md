@@ -27,3 +27,7 @@
 - freebayes
 
 - sequence typing
+
+- recombination
+    - https://github.com/xavierdidelot/ClonalFrameML
+    - https://github.com/nickjcroucher/gubbins

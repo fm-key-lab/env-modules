@@ -1,0 +1,23 @@
+#%Module
+##
+## rust (v1.80.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds rust to your path
+Version 1.80.1
+"
+}
+
+module-whatis "Adds rust to your path\n"
+module-whatis "Provides: rustc, rustup, cargo"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/rust/1.80.1/bin"
+
+setenv --set-if-undef RUSTUP_HOME   $env(GROUP_HOME)/opt/rust/1.80.1
+setenv --set-if-undef CARGO_HOME    $env(GROUP_HOME)/opt/rust/1.80.1

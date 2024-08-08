@@ -17,4 +17,4 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/duckdb"
+prepend-path PATH "${basedir}/apps/duckdb"

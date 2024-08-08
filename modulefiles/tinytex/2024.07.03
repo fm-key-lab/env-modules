@@ -20,5 +20,5 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/tinytex/2024.07.03/bin/x86_64-linux/"
-prepend-path LD_LIBRARY_PATH "${basedir}/tinytex/2024.07.03/bin/x86_64-linux/"
+prepend-path PATH "${basedir}/apps/tinytex/2024.07.03/bin/x86_64-linux/"
+prepend-path LD_LIBRARY_PATH "${basedir}/apps/tinytex/2024.07.03/bin/x86_64-linux/"

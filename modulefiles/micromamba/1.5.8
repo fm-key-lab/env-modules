@@ -20,7 +20,7 @@ if { $basedir eq "" } {
     exit 1
 }
 
-prepend-path PATH "${basedir}/micromamba"
+prepend-path PATH "${basedir}/apps/micromamba"
 
 # Set MAMBA_ROOT_PREFIX to default value if not already set
 if {![info exists env(MAMBA_ROOT_PREFIX)]} {
@@ -34,9 +34,9 @@ setenv MAMBARC $key_conf
 # TODO: Consider hook parsing as implemented in /mpcdf/soft/SLE_15/modules/python/anaconda/3/2023.03
 # Evaluate shell hook
 if {[info exists env(MODULESHOME)]} {
-    catch { exec bash -c "eval \"\$(${basedir}/micromamba/bin/micromamba shell hook -s bash)\"" }
+    catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/bin/micromamba shell hook -s bash)\"" }
     # Enable shell completion
-    catch { exec bash -c "eval \"\$(${basedir}/micromamba/bin/micromamba shell completion)\"" }
+    catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/bin/micromamba shell completion)\"" }
 }
 
 # Cleanup when module is unloaded

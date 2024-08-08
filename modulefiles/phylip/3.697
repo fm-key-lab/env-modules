@@ -19,5 +19,5 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/phylip/3.697"
-prepend-path LD_LIBRARY_PATH "${basedir}/phylip/3.697"
+prepend-path PATH "${basedir}/apps/phylip/3.697"
+prepend-path LD_LIBRARY_PATH "${basedir}/apps/phylip/3.697"

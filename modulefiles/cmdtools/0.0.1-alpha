@@ -18,7 +18,7 @@ if { $basedir eq "" } {
     exit 1
 }
 
-prepend-path PATH "${basedir}/ncdu"
+prepend-path PATH "${basedir}/apps/ncdu"
 
 set key_conf "$env(GROUP_HOME)/etc/ncdu.conf"
 set usr_conf "$env(HOME)/.config/ncdu/config"

@@ -23,7 +23,7 @@ if { $basedir eq "" } {
     exit 1
 }
 
-set root ${basedir}/python/3.12.4
+set root ${basedir}/apps/python/3.12.4
 
 prepend-path    PATH            $root/bin/
 prepend-path    LD_LIBRARY_PATH $root/lib64
