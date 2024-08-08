@@ -1,0 +1,23 @@
+#%Module
+##
+## uv (v0.2.34)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds uv to your path
+Version 0.2.34
+"
+}
+
+module-whatis "Adds uv to your path\n"
+module-whatis "Provides: uv"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/uv/0.2.34/bin"
+
+setenv --set-if-undef RUSTUP_HOME   $env(GROUP_HOME)/opt/rust/1.80.1
+setenv --set-if-undef CARGO_HOME    $env(GROUP_HOME)/opt/rust/1.80.1

@@ -1,10 +1,11 @@
 #%Module
 ##
-## micromamba 1.5
+## micromamba (v1.5.8)
 
 proc ModulesHelp { } {
    puts stderr "
-Adds micromamba (version 1.5) to your path.
+Adds micromamba to your path.
+Version 1.5.8
 "
 }
 
@@ -31,18 +32,17 @@ if {![info exists env(MAMBA_ROOT_PREFIX)]} {
 set key_conf "$env(GROUP_HOME)/etc/.condarc"
 setenv MAMBARC $key_conf
 
-# TODO: Consider hook parsing as implemented in /mpcdf/soft/SLE_15/modules/python/anaconda/3/2023.03
+# TODO: Consider hook parsing as implemented in 
+#       /mpcdf/soft/SLE_15/modules/python/anaconda/3/2023.03
+#       /mpcdf/soft/SLE_15/packages/x86_64/Modules/5.4.0/etc/module_hooks.tcl
+
 # Evaluate shell hook
-if {[info exists env(MODULESHOME)]} {
-    catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/bin/micromamba shell hook -s bash)\"" }
-    # Enable shell completion
-    catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/bin/micromamba shell completion)\"" }
-}
+catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/1.5.8 shell hook -s bash)\"" }
+# Enable shell completion
+catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/1.5.8 shell completion)\"" }
 
 # Cleanup when module is unloaded
 if {[module-info mode remove]} {
     unsetenv MAMBA_ROOT_PREFIX
-    if {[info exists env(MODULESHOME)]} {
-        catch { exec bash -c "eval \"\$(micromamba shell dehook -s bash)\"" }
-    }
+    catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/1.5.8 shell dehook -s bash)\"" }
 }
