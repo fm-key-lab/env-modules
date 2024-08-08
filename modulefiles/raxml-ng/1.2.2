@@ -1,0 +1,20 @@
+#%Module
+##
+## raxml-ng (v1.2.2)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds raxml-ng to your path
+Version 1.2.2
+"
+}
+
+module-whatis "Adds rust to your path\n"
+module-whatis "Provides: raxml-ng"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/raxml-ng/1.2.2/bin"
