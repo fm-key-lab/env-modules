@@ -1,0 +1,20 @@
+#%Module
+##
+## fastp (v0.23.4)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds fastp to your path
+Version: 0.23.4
+"
+}
+
+module-whatis "Adds fastp to your path\n"
+module-whatis "Provides: fastp"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/fastp/0.23.4/bin"

@@ -1,0 +1,20 @@
+#%Module
+##
+## bwa-mem2 (v2.2.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds bwa-mem2 to your path
+Version 2.2.1
+"
+}
+
+module-whatis "Adds bwa-mem2 to your path\n"
+module-whatis "Provides: bwa-mem2"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/bwa-mem2/2.2.1/bin"

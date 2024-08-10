@@ -1,0 +1,20 @@
+#%Module
+##
+## bwa (v0.7.18)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds bwa to your path
+Version 0.7.18
+"
+}
+
+module-whatis "Adds bwa to your path\n"
+module-whatis "Provides: bwa, bwa.kit"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/bwa/0.7.18/bin"

@@ -1,0 +1,20 @@
+#%Module
+##
+## snp-sites (v2.5.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds snp-sites to your path
+Version 2.5.1
+"
+}
+
+module-whatis "Adds snp-sites to your path\n"
+module-whatis "Provides: snp-sites"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/snp-sites/2.5.1/bin"

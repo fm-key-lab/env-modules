@@ -1,16 +1,16 @@
 #%Module
 ##
-## snakemake (v8.16.0)
+## gubbins (v3.3.5)
 
 proc ModulesHelp { } {
    puts stderr "
-Adds snakemake to your path.
-Version 8.16.0
+Adds gubbins to your path.
+Version 3.3.5
 "
 }
 
-module-whatis "Adds snakemake to your path\n"
-module-whatis "Provides: snakemake, snakemake-wrapper-utils, snakefmt, snakedeploy, snakemake-executor-plugin-slurm, snakemake-storage-plugin-webdav"
+module-whatis "Adds gubbins to your path\n"
+module-whatis "Provides: run_gubbins.py generate_ska_alignment.py mask_gubbins_aln.py generate_files_for_clade_analysis.py extract_gubbins_clade_statistics.py"
 
 # TODO: Implement strategy for loading `[micro]mamba` or `[ana]conda` module as described here
 #       https://modules.readthedocs.io/en/latest/cookbook/compiler-etc-dependencies.html#
@@ -25,4 +25,4 @@ if { $basedir eq "" } {
     exit 1
 }
 
-prepend-path PATH "${basedir}/snakemake/8.16.0/bin"
+prepend-path PATH "${basedir}/gubbins/3.3.5/bin"
