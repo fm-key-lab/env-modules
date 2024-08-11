@@ -1,0 +1,32 @@
+#%Module
+##
+## Python (v2.7.5)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds Python to your path
+Version 2.7.5
+"
+}
+ 
+module-whatis "Adds Python to your path\n"
+module-whatis "Provides: python2.7"
+
+conflict anaconda
+conflict miniconda
+conflict micromamba
+conflict python-waterboa
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+set root ${basedir}/python/2.7.5
+
+prepend-path    PATH            $root/bin
+prepend-path    LD_LIBRARY_PATH $root/lib
+prepend-path    MANPATH         $root/share/man
+prepend-path    PKG_CONFIG_PATH $root/lib/pkgconfig
+prepend-path    XDG_DATA_DIRS   $root/share
