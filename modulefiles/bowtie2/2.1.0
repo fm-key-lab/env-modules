@@ -1,0 +1,20 @@
+#%Module
+##
+## Bowtie2 (v2.1.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds Bowtie2 to your path
+Version: 2.1.0
+"
+}
+
+module-whatis "Adds Bowtie2 to your path\n"
+module-whatis "Provides: bowtie2 bowtie2-alig bowtie2-align-debug bowtie2-build bowtie2-build-debug bowtie2-inspect bowtie2-inspect-debug"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/bowtie2/2.1.0/bin"
