@@ -1,0 +1,20 @@
+#%Module
+##
+## task (v3.38.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds task to your path
+Version 3.38.0
+"
+}
+
+module-whatis "Adds task to your path\n"
+module-whatis "Provides: task"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/task/3.38.0/bin"
