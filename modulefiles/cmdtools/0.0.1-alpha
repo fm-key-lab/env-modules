@@ -10,7 +10,7 @@ Version 0.0.1-alpha
 }
  
 module-whatis "Adds command line tools to your path\n"
-module-whatis "Provides: ncdu"
+module-whatis "Provides: ncdu cadaver terminalizer"
 
 set basedir [getenv "MODULE_BASEDIR"]
 if { $basedir eq "" } {
@@ -21,6 +21,8 @@ if { $basedir eq "" } {
 prepend-path PATH "${basedir}/apps/ncdu"
 prepend-path PATH "${basedir}/neon/0.32.5/bin"
 prepend-path PATH "${basedir}/cadaver/0.24/bin"
+prepend-path PATH "${basedir}/nodejs/20.16.0/bin"
+prepend-path PATH "${basedir}/terminalizer/0.11.0/bin"
 
 set key_conf "$env(GROUP_HOME)/etc/ncdu.conf"
 set usr_conf "$env(HOME)/.config/ncdu/config"
