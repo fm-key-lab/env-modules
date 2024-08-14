@@ -21,7 +21,7 @@ if { $basedir eq "" } {
     exit 1
 }
 
-prepend-path PATH "${basedir}/apps/micromamba"
+prepend-path PATH "${basedir}/micromamba"
 
 # Set MAMBA_ROOT_PREFIX to default value if not already set
 if {![info exists env(MAMBA_ROOT_PREFIX)]} {
@@ -37,12 +37,12 @@ setenv MAMBARC $key_conf
 #       /mpcdf/soft/SLE_15/packages/x86_64/Modules/5.4.0/etc/module_hooks.tcl
 
 # Evaluate shell hook
-catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/1.5.8 shell hook -s bash)\"" }
+catch { exec bash -c "eval \"\$(${basedir}/micromamba/1.5.8 shell hook -s bash)\"" }
 # Enable shell completion
-catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/1.5.8 shell completion)\"" }
+catch { exec bash -c "eval \"\$(${basedir}/micromamba/1.5.8 shell completion)\"" }
 
 # Cleanup when module is unloaded
 if {[module-info mode remove]} {
     unsetenv MAMBA_ROOT_PREFIX
-    catch { exec bash -c "eval \"\$(${basedir}/apps/micromamba/1.5.8 shell dehook -s bash)\"" }
+    catch { exec bash -c "eval \"\$(${basedir}/micromamba/1.5.8 shell dehook -s bash)\"" }
 }
