@@ -1,0 +1,20 @@
+#%Module
+##
+## fasttree_dbl (v2.1.11)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds fasttree_dbl to your path
+Version: 2.1.11
+"
+}
+
+module-whatis "Adds fasttree_dbl to your path\n"
+module-whatis "Provides: fasttree_dbl <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/fasttree_dbl/2.1.11/"
