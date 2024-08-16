@@ -1,0 +1,20 @@
+#%Module
+##
+## pandoc (v3.3)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds pandoc to your path
+Version: 3.3
+"
+}
+
+module-whatis "Adds pandoc to your path\n"
+module-whatis "Provides: pandoc <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/pandoc/3.3/pandoc-3.3/bin/"
