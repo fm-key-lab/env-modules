@@ -1,0 +1,29 @@
+#%Module
+##
+## ncurses (v6.5)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds ncurses to your path
+Version: 6.5
+"
+}
+
+module-whatis "Adds ncurses to your path\n"
+module-whatis "Provides: ncurses <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+set root ${basedir}/ncurses/6.5
+
+prepend-path    PATH            $root
+prepend-path    LD_LIBRARY_PATH $root/lib
+prepend-path    MANPATH         $root/share/man
+prepend-path    PATH            $root/bin
+
+setenv --set-if-undef CPPFLAGS "-I$env(GROUP_HOME)/opt/ncurses/6.5/include/ncursesw"
+setenv --set-if-undef LDFLAGS "-L$env(GROUP_HOME)/opt/ncurses/6.5/lib"
