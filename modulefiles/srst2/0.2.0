@@ -15,7 +15,7 @@ module-whatis "Provides: srst2 getmlst.py slurm_srst2.py"
 module load apptainer
 
 proc make_alias {name} {
-    set cmd "apptainer --quiet exec \$GROUP_HOME/containers/srst2.sif $name \$*"
+    set cmd "apptainer --quiet exec --bind /raven/ptmp,/ptmp,/raven/u,/u,/r,/nexus \$GROUP_HOME/containers/srst2.sif $name \$*"
     set-alias $name $cmd
 }
 
