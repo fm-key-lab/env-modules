@@ -1,0 +1,20 @@
+#%Module
+##
+## yq (v4.44.3)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds yq to your path
+Version: 4.44.3
+"
+}
+
+module-whatis "Adds yq to your path\n"
+module-whatis "Provides: yq <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/yq/4.44.3/"

@@ -36,13 +36,16 @@ setenv MAMBARC $key_conf
 #       /mpcdf/soft/SLE_15/modules/python/anaconda/3/2023.03
 #       /mpcdf/soft/SLE_15/packages/x86_64/Modules/5.4.0/etc/module_hooks.tcl
 
-# Evaluate shell hook
-catch { exec bash -c "eval \"\$(${basedir}/micromamba/1.5.8 shell hook -s bash)\"" }
-# Enable shell completion
-catch { exec bash -c "eval \"\$(${basedir}/micromamba/1.5.8 shell completion)\"" }
+if {[module-info mode load]} {
+    puts stderr "`micromamba` in this module can't modify the parent shell."
+    puts stderr "Thus you must initialize your shell before using activate and deactivate."
+    puts stderr "To initialize the current bash shell, run:"
+    puts stderr "  eval \"\$(micromamba shell hook --shell bash)\""
+}
 
-# Cleanup when module is unloaded
 if {[module-info mode remove]} {
     unsetenv MAMBA_ROOT_PREFIX
-    catch { exec bash -c "eval \"\$(${basedir}/micromamba/1.5.8 shell dehook -s bash)\"" }
+    puts stderr "To de-initialize the current bash shell, run:"
+    puts stderr "  micromamba shell deinit"
+    puts stderr "  unset -f micromamba"
 }

@@ -1,0 +1,20 @@
+#%Module
+##
+## aria2 (v1.37.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds aria2 to your path
+Version: 1.37.0
+"
+}
+
+module-whatis "Adds aria2 to your path\n"
+module-whatis "Provides: aria2 <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/aria2/1.37.0/bin/"

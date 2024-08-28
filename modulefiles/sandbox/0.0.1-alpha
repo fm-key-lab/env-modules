@@ -1,0 +1,40 @@
+#%Module
+##
+## sandbox (v0.0.1-alpha)
+
+proc ModulesHelp { } {
+   puts stderr "
+Provides a 'sandbox' python virtual environment loaded with some commonly used libraries.
+Version 0.0.1-alpha
+"
+}
+
+module-whatis "Enter 'sandbox' python venv\n"
+module-whatis "Provides: dask duckdb jax openpyxl python3.12"
+
+conflict anaconda
+conflict python
+conflict micromamba
+
+set groupdir [getenv "GROUP_HOME"]
+if { $groupdir eq "" } {
+    puts stderr "Error: GROUP_HOME environment variable is not set."
+    exit 1
+}
+
+set venv "${groupdir}/envs/venv/sandbox/.venv"
+
+prepend-path            PATH                        "${venv}/bin"
+# setenv --set-if-undef   PS1                         "(sandbox) $env(PS1)"
+setenv --set-if-undef   PS1                         "(sandbox)"
+setenv --set-if-undef   VIRTUAL_ENV                 "${venv}"
+setenv                  VIRTUAL_ENV_DISABLE_PROMPT  1
+
+depends-on uv
+
+if {[module-info mode unload]} {
+    remove-path PATH "${venv}/bin"
+    unsetenv PS1
+    unsetenv VIRTUAL_ENV
+    unsetenv VIRTUAL_ENV_DISABLE_PROMPT
+}
