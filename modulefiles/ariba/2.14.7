@@ -1,0 +1,45 @@
+#%Module
+##
+## ariba (v0.0.1-alpha)
+
+proc ModulesHelp { } {
+   puts stderr "
+Provides ariba python virtual environment.
+Version 0.0.1-alpha
+"
+}
+
+module-whatis "Enter 'ariba' python venv\n"
+module-whatis "Provides: ... <-- should edit to list libraries"
+
+conflict anaconda
+conflict python
+conflict micromamba
+
+set groupdir [getenv "GROUP_HOME"]
+if { $groupdir eq "" } {
+    puts stderr "Error: GROUP_HOME environment variable is not set."
+    exit 1
+}
+
+set venv "${groupdir}/envs/venv/ariba/.venv"
+
+prepend-path            PATH                        "${venv}/bin"
+# setenv --set-if-undef   PS1                         "(ariba) $env(PS1)"
+setenv --set-if-undef   VIRTUAL_ENV                 "${venv}"
+setenv                  VIRTUAL_ENV_DISABLE_PROMPT  1
+
+depends-on uv
+
+if {[module-info mode unload]} {
+    remove-path PATH "${venv}/bin"
+    unsetenv PS1
+    unsetenv VIRTUAL_ENV
+    unsetenv VIRTUAL_ENV_DISABLE_PROMPT
+}
+
+depends-on mummer
+
+setenv --set-if-undef   ARIBA_BOWTIE2   "${groupdir}/opt/bowtie2/2.1.0/bowtie2-2.1.0/bowtie2"
+setenv --set-if-undef   ARIBA_CDHIT   "${groupdir}/opt/cdhit/4.8.1/bin/cd-hit-est"
+setenv --set-if-undef   PYTHONWARNINGS    "ignore::SyntaxWarning"
