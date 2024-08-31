@@ -1,37 +1,28 @@
 #%Module
 ##
-## srst2 (v0.2.0)
+## srst2 (v0.2.1)
 
 proc ModulesHelp { } {
    puts stderr "
 Adds srst2 to your path
-Version: 0.2.0
+Version: 0.2.1
 "
 }
 
-module-whatis "Adds srst2 to your path\n"
-module-whatis "Provides: srst2 getmlst.py slurm_srst2.py"
+module-whatis "DEV: NONFUNCTIONAL\n"
 
-depends-on apptainer/1.3.2
-
-proc make_alias {name} {
-    set cmd "apptainer --quiet exec --bind /raven/ptmp,/ptmp,/raven/u,/u,/r,/nexus \$GROUP_HOME/containers/srst2.sif $name \$*"
-    set-alias $name $cmd
-}
-
-foreach cmd {srst2 getmlst.py slurm_srst2.py} {
-    make_alias $cmd
-}
+depends-on python/2.7
 
 set basedir [getenv "MODULE_BASEDIR"]
 if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
+prepend-path PATH                   "${basedir}/srst2/0.2.1/bin"
 
 # "The downloaded directory also contains things that might be useful for SRST2 users:"
-setenv SRST2_DATA                   "${basedir}/srst2/0.2.0/srst2/data"
-setenv SRST2_DATABASE_CLUSTERING    "${basedir}/srst2/0.2.0/srst2/database_clustering"
+setenv SRST2_DATA                   "${basedir}/srst2/0.2.1/srst2/data"
+setenv SRST2_DATABASE_CLUSTERING    "${basedir}/srst2/0.2.1/srst2/database_clustering"
 
 setenv SRST2_SAMTOOLS               "${basedir}/samtools/0.1.18/samtools-0.1.18/samtools"
 setenv SRST2_BOWTIE2                "${basedir}/bowtie2/2.1.0/bowtie2-2.1.0/bowtie2"

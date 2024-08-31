@@ -17,4 +17,4 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/bowtie2/2.1.0/bin"
+prepend-path PATH "${basedir}/bowtie2/2.1.0/bowtie2-2.1.0"

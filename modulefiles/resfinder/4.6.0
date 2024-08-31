@@ -1,0 +1,50 @@
+#%Module
+##
+## resfinder (v0.0.1-alpha)
+
+proc ModulesHelp { } {
+   puts stderr "
+Provides resfinder python virtual environment.
+Version 0.0.1-alpha
+"
+}
+
+module-whatis "Enter 'resfinder' python venv\n"
+module-whatis "Provides: ... <-- should edit to list libraries"
+
+conflict anaconda
+conflict python
+conflict micromamba
+
+set groupdir [getenv "GROUP_HOME"]
+if { $groupdir eq "" } {
+    puts stderr "Error: GROUP_HOME environment variable is not set."
+    exit 1
+}
+
+set venv "${groupdir}/envs/venv/resfinder/.venv"
+
+prepend-path            PATH                        "${venv}/bin"
+# setenv --set-if-undef   PS1                         "(resfinder)"
+setenv --set-if-undef   VIRTUAL_ENV                 "${venv}"
+setenv                  VIRTUAL_ENV_DISABLE_PROMPT  1
+
+depends-on uv
+
+if {[module-info mode unload]} {
+    remove-path PATH "${venv}/bin"
+    unsetenv PS1
+    unsetenv VIRTUAL_ENV
+    unsetenv VIRTUAL_ENV_DISABLE_PROMPT
+}
+
+setenv --set-if-undef   CGE_BLASTN                  "${groupdir}/opt/blast/2.16.0/ncbi-blast-2.16.0+/bin/blastn"
+setenv --set-if-undef   CGE_KMA                     "${groupdir}/opt/kma/1.4.15/kma/kma"
+setenv --set-if-undef   CGE_RESFINDER_RESGENE_DB    ""
+setenv --set-if-undef   CGE_RESFINDER_RESPOINT_DB   ""
+setenv --set-if-undef   CGE_RESFINDER_GENE_COV      "0.60"
+setenv --set-if-undef   CGE_RESFINDER_GENE_ID       "0.80"
+setenv --set-if-undef   CGE_RESFINDER_POINT_COV     "0.60"
+setenv --set-if-undef   CGE_RESFINDER_POINT_ID      "0.80"
+setenv --set-if-undef   CGE_DISINFINDER_DB          ""
+setenv --set-if-undef   CGE_DISINFINDER_DB_KMA      "kma"

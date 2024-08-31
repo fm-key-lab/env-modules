@@ -1,0 +1,24 @@
+#%Module
+##
+## kmerresistance (v2.2.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds kmerresistance to your path
+Version: 2.2.0
+"
+}
+
+module-whatis "Adds kmerresistance to your path\n"
+module-whatis "Provides: kmerresistance <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+prepend-path PATH "${basedir}/kmerresistance/2.2.0/kmerresistance"
+prepend-path PATH "${basedir}/kma/1.4.15/kma"
