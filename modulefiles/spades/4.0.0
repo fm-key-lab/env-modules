@@ -1,0 +1,22 @@
+#%Module
+##
+## spades (v4.0.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds spades to your path
+Version: 4.0.0
+"
+}
+
+module-whatis "Adds spades to your path\n"
+module-whatis "Provides: spades <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/spades/4.0.0/SPAdes-4.0.0-Linux/bin/"

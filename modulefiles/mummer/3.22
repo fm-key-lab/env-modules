@@ -1,0 +1,22 @@
+#%Module
+##
+## mummer (v3.22)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds mummer to your path
+Version: 3.22
+"
+}
+
+module-whatis "Adds mummer to your path\n"
+module-whatis "Provides: mummer <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/mummer/3.22/MUMmer3.22/"

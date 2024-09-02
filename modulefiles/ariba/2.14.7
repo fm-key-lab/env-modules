@@ -1,11 +1,11 @@
 #%Module
 ##
-## ariba (v0.0.1-alpha)
+## ariba (v2.14.7)
 
 proc ModulesHelp { } {
    puts stderr "
 Provides ariba python virtual environment.
-Version 0.0.1-alpha
+Version 2.14.7
 "
 }
 
@@ -38,7 +38,8 @@ if {[module-info mode unload]} {
     unsetenv VIRTUAL_ENV_DISABLE_PROMPT
 }
 
-depends-on mummer
+depends-on mummer/3.22
+depends-on spades
 
 setenv --set-if-undef   ARIBA_BOWTIE2   "${groupdir}/opt/bowtie2/2.1.0/bowtie2-2.1.0/bowtie2"
 setenv --set-if-undef   ARIBA_CDHIT   "${groupdir}/opt/cdhit/4.8.1/bin/cd-hit-est"

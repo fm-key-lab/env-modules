@@ -14,19 +14,52 @@ module-whatis "Provides: srst2 getmlst.py slurm_srst2.py"
 
 depends-on apptainer/1.3.2
 
-proc make_alias {name} {
-    set cmd "apptainer --quiet exec --bind /raven/ptmp,/ptmp,/raven/u,/u,/r,/nexus \$GROUP_HOME/containers/srst2.sif $name \$*"
-    set-alias $name $cmd
-}
-
-foreach cmd {srst2 getmlst.py slurm_srst2.py} {
-    make_alias $cmd
-}
 
 set basedir [getenv "MODULE_BASEDIR"]
 if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
+}
+
+# TODO: This approach does not work in the context of a snakemake rule...
+# proc make_alias {name} {
+#     set cmd "apptainer --quiet exec --home \$PWD --bind /raven/ptmp,/ptmp,/raven/u,/u,/r,/nexus \$GROUP_HOME/containers/srst2.sif $name \$*"
+#     set-alias $name $cmd
+# }
+
+# foreach cmd {srst2 getmlst.py slurm_srst2.py} {
+#     make_alias $cmd
+# }
+
+# TODO: ... but this one does.
+set-function srst2 {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /raven/ptmp,/ptmp,/raven/u,/u,/nexus \
+      $GROUP_HOME/containers/srst2.sif \
+      srst2 \
+      "$@"
+}
+
+set-function "getmlst.py" {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /raven/ptmp,/ptmp,/raven/u,/u,/nexus \
+      $GROUP_HOME/containers/srst2.sif \
+      getmlst.py \
+      "$@"
+}
+
+set-function "slurm_srst2.py" {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /raven/ptmp,/ptmp,/raven/u,/u,/nexus \
+      $GROUP_HOME/containers/srst2.sif \
+      slurm_srst2.py \
+      "$@"
 }
 
 # "The downloaded directory also contains things that might be useful for SRST2 users:"
