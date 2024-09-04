@@ -1,0 +1,22 @@
+#%Module
+##
+## yadm (v3.2.2)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds yadm to your path
+Version: 3.2.2
+"
+}
+
+module-whatis "Adds yadm to your path\n"
+module-whatis "Provides: yadm <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/yadm/3.2.2/yadm/"

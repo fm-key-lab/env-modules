@@ -1,0 +1,35 @@
+#%Module
+##
+## direnv (v2.34.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds direnv to your path
+Version: 2.34.0
+"
+}
+
+module-whatis "Adds direnv to your path\n"
+module-whatis "Provides: direnv <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+prepend-path PATH "${basedir}/direnv/2.34.0/"
+
+if {[module-info mode load]} {
+    puts stderr "`direnv` in this module can't modify the parent shell."
+    puts stderr "Thus you must initialize your shell before using activate and deactivate."
+    puts stderr "To initialize the current bash shell, run:"
+    puts stderr "  eval \"\$(direnv hook bash)\""
+}
+
+if {[module-info mode remove]} {
+    puts stderr "To de-initialize the current bash shell, run:"
+    puts stderr "  unset -f direnv"
+}
