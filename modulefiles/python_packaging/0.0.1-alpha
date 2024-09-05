@@ -1,0 +1,41 @@
+#%Module
+##
+## python_packaging (v0.0.1-alpha)
+
+proc ModulesHelp { } {
+   puts stderr "
+Provides a 'python_packaging' python virtual environment loaded with PyScaffold.
+Version 0.0.1-alpha
+"
+}
+
+module-whatis "Enter 'python_packaging' python venv\n"
+module-whatis "Provides: pyscaffold"
+
+conflict anaconda
+conflict python
+conflict micromamba
+conflict sandbox
+
+set groupdir [getenv "GROUP_HOME"]
+if { $groupdir eq "" } {
+    puts stderr "Error: GROUP_HOME environment variable is not set."
+    exit 1
+}
+
+set venv "${groupdir}/envs/venv/python_packaging/.venv"
+
+prepend-path            PATH                        "${venv}/bin"
+# setenv --set-if-undef   PS1                         "(python_packaging) $env(PS1)"
+setenv --set-if-undef   PS1                         "(python_packaging)"
+setenv --set-if-undef   VIRTUAL_ENV                 "${venv}"
+setenv                  VIRTUAL_ENV_DISABLE_PROMPT  1
+
+depends-on uv
+
+if {[module-info mode unload]} {
+    remove-path PATH "${venv}/bin"
+    unsetenv PS1
+    unsetenv VIRTUAL_ENV
+    unsetenv VIRTUAL_ENV_DISABLE_PROMPT
+}

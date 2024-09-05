@@ -1,0 +1,22 @@
+#%Module
+##
+## vcftools (v0.1.16)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds vcftools to your path
+Version: 0.1.16
+"
+}
+
+module-whatis "Adds vcftools to your path\n"
+module-whatis "Provides: vcftools <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/vcftools/0.1.16/bin/"

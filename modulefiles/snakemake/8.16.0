@@ -10,7 +10,10 @@ Version 8.16.0
 }
 
 module-whatis "Adds snakemake to your path\n"
-module-whatis "Provides: snakemake, snakemake-wrapper-utils, snakefmt, snakedeploy, snakemake-executor-plugin-slurm, snakemake-storage-plugin-webdav"
+module-whatis "Provides: snakemake, snakemake-wrapper-utils, snakefmt, snakedeploy, snakemake-executor-plugin-slurm, snakemake-storage-plugin-webdav peppy"
+
+conflict anaconda
+conflict python
 
 # TODO: Implement strategy for loading `[micro]mamba` or `[ana]conda` module as described here
 #       https://modules.readthedocs.io/en/latest/cookbook/compiler-etc-dependencies.html#
@@ -24,5 +27,7 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
+
+depends-on micromamba
 
 prepend-path PATH "${basedir}/snakemake/8.16.0/bin"
