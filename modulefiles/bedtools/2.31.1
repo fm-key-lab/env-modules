@@ -1,0 +1,26 @@
+#%Module
+##
+## bedtools (v2.31.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds bedtools to your path
+Version: 2.31.1
+"
+}
+
+module-whatis "Adds bedtools to your path\n"
+module-whatis "Provides: 
+annotateBed  bedpeToBam  closestBed     expandCols         getOverlap    mapBed            multiIntersectBed  randomBed   sortBed         windowBed
+bamToBed     bedToBam    clusterBed     fastaFromBed       groupBy       maskFastaFromBed  nucBed             shiftBed    subtractBed     windowMaker
+bamToFastq   bedToIgv    complementBed  flankBed           intersectBed  mergeBed          pairToBed          shuffleBed  tagBam
+bed12ToBed6  bedtools    coverageBed    genomeCoverageBed  linksBed      multiBamCov       pairToPair         slopBed     unionBedGraphs"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/bedtools/2.31.1/bedtools2/bin/"

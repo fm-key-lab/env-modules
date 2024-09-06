@@ -1,0 +1,24 @@
+#%Module
+##
+## mosdepth (v0.3.9)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds mosdepth to your path
+Version: 0.3.9
+"
+}
+
+module-whatis "Adds mosdepth to your path\n"
+module-whatis "Provides: mosdepth <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/mosdepth/0.3.9/mosdepth-0.3.9/"
+
+setenv LD_LIBRARY_PATH "${basedir}/htslib/1.20/htslib-1.20"
