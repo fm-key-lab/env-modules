@@ -28,6 +28,7 @@ if { $basedir eq "" } {
     exit 1
 }
 
-depends-on micromamba
+# TODO: Better solution to smk's conda dependency
+# depends-on micromamba
 
 prepend-path PATH "${basedir}/snakemake/8.16.0/bin"
