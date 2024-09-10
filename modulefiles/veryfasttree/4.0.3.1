@@ -1,0 +1,57 @@
+#%Module
+##
+## veryfasttree (v4.0.3.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Provides Python bindings to 'veryfasttree' in a virtual environment.
+Version 4.0.3.1
+"
+}
+
+module-whatis "Enter python venv with veryfasttree\n"
+module-whatis "Provides: veryfasttree"
+
+conflict anaconda
+conflict python
+conflict micromamba
+
+set groupdir [getenv "GROUP_HOME"]
+if { $groupdir eq "" } {
+    puts stderr "Error: GROUP_HOME environment variable is not set."
+    exit 1
+}
+
+set venv "${groupdir}/opt/veryfasttree/4.0.3.1/.venv"
+
+prepend-path            PATH                        "${venv}/bin"
+# setenv --set-if-undef   PS1                         "(sandbox) $env(PS1)"
+setenv --set-if-undef   PS1                         "(veryfasttree)"
+setenv --set-if-undef   VIRTUAL_ENV                 "${venv}"
+setenv                  VIRTUAL_ENV_DISABLE_PROMPT  1
+
+# veryfasttree settings
+setenv --set-if-undef   OMP_PLACES                  "threads"
+set threads [getenv "SLURM_CPUS_PER_TASK"]
+if { $threads eq "" } {
+    puts stderr "`SLURM_CPUS_PER_TASK` not set. Are you running outside a SLURM job context?"
+    puts stderr "Defaulting to single-threaded."
+    puts stderr "Set `OMP_NUM_THREADS` to the desired number of threads if >1."
+    puts stderr "Disregard if `OMP_NUM_THREADS` is already set."
+    setenv --set-if-undef   OMP_NUM_THREADS         "1"
+} else {
+    setenv --set-if-undef   OMP_NUM_THREADS         $threads
+}
+
+depends-on uv
+
+set-function "veryfasttree" {
+    python3 -m veryfasttree "$@"
+} 
+
+if {[module-info mode unload]} {
+    remove-path PATH "${venv}/bin"
+    unsetenv PS1
+    unsetenv VIRTUAL_ENV
+    unsetenv VIRTUAL_ENV_DISABLE_PROMPT
+}
