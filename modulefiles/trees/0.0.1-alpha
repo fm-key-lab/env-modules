@@ -1,0 +1,35 @@
+#%Module
+##
+## trees (v0.0.1-alpha)
+
+proc ModulesHelp { } {
+   puts stderr "
+Activate conda environment for plotting phylogenies.
+Version 0.0.1-alpha
+"
+}
+
+module-whatis "Activate conda environment for plotting phylogenies\n"
+module-whatis "Provides: ETE toolkit (ete3 ete_toolchain) toytree"
+
+conflict micromamba
+conflict python
+
+depends-on anaconda/3/2023.03
+
+set groupdir [getenv "GROUP_HOME"]
+if { $groupdir eq "" } {
+    puts stderr "Error: GROUP_HOME environment variable is not set."
+    exit 1
+}
+
+set conda_env "${groupdir}/envs/conda/phyloviz_env"
+if {[module-info mode load]} {
+    puts stderr "source activate ${conda_env} --stack"
+    # set activate_script [file dirname $ModulesCurrentModulefile]/activate.sh
+    # source-sh bash-eval $activate_script "${conda_env}"
+}
+
+if {[module-info mode unload]} {
+    puts stderr "conda deactivate"
+}

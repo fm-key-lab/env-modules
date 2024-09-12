@@ -19,4 +19,4 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/blast/2.16.0/ncbi-blast+/bin/"
+prepend-path PATH "${basedir}/blast/2.16.0/ncbi-blast-2.16.0+/bin/"
