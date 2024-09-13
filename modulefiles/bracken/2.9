@@ -1,0 +1,22 @@
+#%Module
+##
+## bracken (v2.9)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds bracken to your path
+Version: 2.9
+"
+}
+
+module-whatis "Adds bracken to your path\n"
+module-whatis "Provides: bracken <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/bracken/2.9/Bracken-2.9/"

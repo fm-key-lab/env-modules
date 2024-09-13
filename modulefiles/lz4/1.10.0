@@ -1,0 +1,22 @@
+#%Module
+##
+## lz4 (v1.10.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds lz4 to your path
+Version: 1.10.0
+"
+}
+
+module-whatis "Adds lz4 to your path\n"
+module-whatis "Provides: lz4 <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/lz4/1.10.0/bin/"

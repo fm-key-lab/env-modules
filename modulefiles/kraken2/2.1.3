@@ -1,0 +1,22 @@
+#%Module
+##
+## kraken2 (v2.1.3)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds kraken2 to your path
+Version: 2.1.3
+"
+}
+
+module-whatis "Adds kraken2 to your path\n"
+module-whatis "Provides: kraken2 <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/kraken2/2.1.3/"
