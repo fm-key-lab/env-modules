@@ -1,0 +1,28 @@
+#%Module
+##
+## figtree (v1.4.5)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds figtree to your path
+Version: 1.4.5
+"
+}
+
+module-whatis "Adds figtree to your path\n"
+module-whatis "Provides: figtree <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/figtree/1.4.5/FigTree v1.4.5_pre/lib/"
+
+depends-on jdk/21
+
+set-function figtree {
+  java -Xms64m -Xmx512m -jar "$MODULE_BASEDIR/figtree/1.4.5/FigTree v1.4.5_pre/lib/figtree.jar" "$@"
+}
