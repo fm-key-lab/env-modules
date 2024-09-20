@@ -1,0 +1,22 @@
+#%Module
+##
+## perl (v5.40.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds perl to your path
+Version: 5.40.0
+"
+}
+
+module-whatis "Adds perl to your path\n"
+module-whatis "Provides: perl <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/perl/5.40.0/bin/"
