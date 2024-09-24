@@ -1,0 +1,22 @@
+#%Module
+##
+## sratoolkit (v3.1.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds sratoolkit to your path
+Version: 3.1.1
+"
+}
+
+module-whatis "Adds sratoolkit to your path\n"
+module-whatis "Provides: sratoolkit <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/sratoolkit/3.1.1/sratoolkit.3.1.1-centos_linux64/bin/"

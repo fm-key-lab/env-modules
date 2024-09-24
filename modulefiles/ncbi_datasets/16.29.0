@@ -1,0 +1,22 @@
+#%Module
+##
+## ncbi_datasets (v16.29.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds ncbi_datasets to your path
+Version: 16.29.0
+"
+}
+
+module-whatis "Adds ncbi_datasets to your path\n"
+module-whatis "Provides: ncbi_datasets <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/ncbi_datasets/16.29.0/"
