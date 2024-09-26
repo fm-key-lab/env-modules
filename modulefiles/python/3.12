@@ -26,10 +26,10 @@ if { $basedir eq "" } {
 set root ${basedir}/python/3.12.4
 
 prepend-path    PATH            $root/bin/
-prepend-path    LD_LIBRARY_PATH $root/lib64
+prepend-path    LD_LIBRARY_PATH $root/lib
 prepend-path    MANPATH         $root/share/man
 prepend-path    PATH            $root/bin
-prepend-path    PKG_CONFIG_PATH $root/lib64/pkgconfig
+prepend-path    PKG_CONFIG_PATH $root/lib/pkgconfig
 prepend-path    XDG_DATA_DIRS   $root/share
 
 set key_conf "$env(GROUP_HOME)/etc/pip.conf"
