@@ -1,46 +1,42 @@
 #%Module
 ##
-## micromamba (v1.5.8)
+## micromamba (v2.0.1-0)
 
 proc ModulesHelp { } {
    puts stderr "
-Adds micromamba to your path.
-Version 1.5.8
+Adds micromamba to your path
+Version: 2.0.1-0
 "
 }
 
 module-whatis "Adds micromamba to your path\n"
-module-whatis "Provides: micromamba"
-
-conflict anaconda
-conflict python
+module-whatis "Provides: micromamba <-- should edit to list executables"
 
 set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
 if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
+prepend-path PATH "${basedir}/micromamba/2.0.1-0/bin/"
 
-prepend-path PATH "${basedir}/micromamba"
+conflict anaconda
+conflict python
 
 # Set MAMBA_ROOT_PREFIX to default value if not already set
 if {![info exists env(MAMBA_ROOT_PREFIX)]} {
-    setenv MAMBA_ROOT_PREFIX "$env(HOME)/dev/envs"
+    setenv MAMBA_ROOT_PREFIX "$env(GROUP_HOME)/envs/conda"
 }
 
-# cat /mpcdf/soft/SLE_15/packages/x86_64/anaconda/3/2023.03/.condarc
-set key_conf "$env(GROUP_HOME)/etc/.condarc"
-setenv MAMBARC $key_conf
-
-# TODO: Consider hook parsing as implemented in 
-#       /mpcdf/soft/SLE_15/modules/python/anaconda/3/2023.03
-#       /mpcdf/soft/SLE_15/packages/x86_64/Modules/5.4.0/etc/module_hooks.tcl
-
 if {[module-info mode load]} {
-    puts stderr "`micromamba` in this module can't modify the parent shell."
-    puts stderr "Thus you must initialize your shell before using activate and deactivate."
+    puts stderr "micromamba in this module cannot modify the parent shell."
+    puts stderr "If you require activate and deactivate, you must initialize your shell."
     puts stderr "To initialize the current bash shell, run:"
     puts stderr "  eval \"\$(micromamba shell hook --shell bash)\""
+    puts stderr ""
+    puts stderr "To create environments using `-n` in a location other than the default (\$GROUP_HOME/envs/conda), use"
+    puts stderr "  export MAMBA_ROOT_PREFIX=/path/to/envs"
 }
 
 if {[module-info mode remove]} {

@@ -1,0 +1,27 @@
+#%Module
+##
+## vcf2parquet (v0.4.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds vcf2parquet to your path
+Version: 0.4.1
+"
+}
+
+module-whatis "Adds vcf2parquet to your path\n"
+module-whatis "Provides: vcf2parquet <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/vcf2parquet/0.4.1/envs/env/bin/"
+depends-on micromamba/2.0.1-0
+
+set-function vcf2parquet {
+    micromamba run -p "$GROUP_HOME/opt/vcf2parquet/0.4.1/envs/env" vcf2parquet "$@"
+}
