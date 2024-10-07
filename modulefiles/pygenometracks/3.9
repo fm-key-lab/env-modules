@@ -1,0 +1,29 @@
+#%Module
+##
+## pygenometracks (v3.9)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds pygenometracks to your path
+Version: 3.9
+"
+}
+
+module-whatis "Adds pygenometracks to your path\n"
+module-whatis "Provides: pygenometracks <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/pygenometracks/3.9/envs/coolbox/bin/"
+depends-on micromamba/2.0.1-0
+
+depends-on bcftools/1.20
+
+depends-on htslib/1.20
+
+depends-on samtools/1.20

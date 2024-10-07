@@ -1,0 +1,26 @@
+#%Module
+##
+## ggtree (v3.19)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds ggtree to your path
+Version: 3.19
+"
+}
+
+module-whatis "Adds ggtree to your path\n"
+module-whatis "Provides: ggtree"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+depends-on anaconda/3/2023.03
+depends-on R/4.4
+
+setenv R_LIBS_SITE "${basedir}/opt/ggtree/3.19/R_libs"
