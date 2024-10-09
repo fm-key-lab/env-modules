@@ -39,3 +39,5 @@ if {[module-info mode unload]} {
         exec rm -f $usr_conf
     }
 }
+
+prepend-path PATH "${basedir}/termshot/0.2.10"
