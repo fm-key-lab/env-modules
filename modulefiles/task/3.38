@@ -17,4 +17,9 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
+
 prepend-path PATH "${basedir}/task/3.38.0/bin"
+
+set-function "labtasks" {
+    task -t $GROUP_HOME/tools/lab-tasks "$@"
+}
