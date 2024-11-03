@@ -1,0 +1,22 @@
+#%Module
+##
+## prodigal (v2.6.3)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds prodigal to your path
+Version: 2.6.3
+"
+}
+
+module-whatis "Adds prodigal to your path\n"
+module-whatis "Provides: prodigal <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/prodigal/2.6.3/bin/"
