@@ -1,0 +1,33 @@
+#%Module
+##
+## prokka (v1.14.6)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds prokka to your path
+Version: 1.14.6
+"
+}
+
+module-whatis "Adds prokka to your path\n"
+module-whatis "Provides: prokka <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/prokka/1.14.6/"
+depends-on apptainer/1.3.2
+
+set-function "prokka" {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /raven/ptmp,/viper/ptmp,/raven/u,/viper/u,/nexus,/r \
+      $GROUP_HOME/containers/prokka.sif \
+      prokka \
+      "$@"
+}
