@@ -1,0 +1,22 @@
+#%Module
+##
+## megahit (v1.2.9)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds megahit to your path
+Version: 1.2.9
+"
+}
+
+module-whatis "Adds megahit to your path\n"
+module-whatis "Provides: megahit <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/megahit/1.2.9/MEGAHIT-1.2.9-Linux-x86_64-static/bin/"
