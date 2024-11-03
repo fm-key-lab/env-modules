@@ -1,0 +1,22 @@
+#%Module
+##
+## bbtools (v39.10)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds bbtools to your path
+Version: 39.10
+"
+}
+
+module-whatis "Adds bbtools to your path\n"
+module-whatis "Provides: bbtools <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/bbtools/39.10/bbmap/"
