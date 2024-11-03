@@ -1,0 +1,22 @@
+#%Module
+##
+## miniprot (v0.13)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds miniprot to your path
+Version: 0.13
+"
+}
+
+module-whatis "Adds miniprot to your path\n"
+module-whatis "Provides: miniprot <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/miniprot/0.13/miniprot-0.13_x64-linux/"
