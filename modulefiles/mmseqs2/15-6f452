@@ -1,0 +1,22 @@
+#%Module
+##
+## mmseqs2 (v15-6f452)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds mmseqs2 to your path
+Version: 15-6f452
+"
+}
+
+module-whatis "Adds mmseqs2 to your path\n"
+module-whatis "Provides: mmseqs2 <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/mmseqs2/15-6f452/mmseqs/bin/"
