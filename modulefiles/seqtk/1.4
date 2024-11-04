@@ -1,0 +1,22 @@
+#%Module
+##
+## seqtk (v1.4)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds seqtk to your path
+Version: 1.4
+"
+}
+
+module-whatis "Adds seqtk to your path\n"
+module-whatis "Provides: seqtk <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/seqtk/1.4/bin/"

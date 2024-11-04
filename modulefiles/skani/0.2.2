@@ -1,0 +1,25 @@
+#%Module
+##
+## skani (v0.2.2)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds skani to your path
+Version: 0.2.2
+"
+}
+
+module-whatis "Adds skani to your path\n"
+module-whatis "Provides: skani <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/skani/0.2.2/.cargo/bin/"
+depends-on rust/1.81.0
+setenv --set-if-undef RUSTUP_HOME   $env(GROUP_HOME)/opt/rust/1.81.0
+setenv --set-if-undef CARGO_HOME    $env(GROUP_HOME)/opt/skani/0.2.2
