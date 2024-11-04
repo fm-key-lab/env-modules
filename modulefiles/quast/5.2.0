@@ -1,0 +1,26 @@
+#%Module
+##
+## quast (v5.2.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds quast to your path
+Version: 5.2.0
+"
+}
+
+module-whatis "Adds quast to your path\n"
+module-whatis "Provides: quast <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/quast/5.2.0/.venv/bin/"
+depends-on gcc/14
+depends-on jdk/21
+depends-on perl/5.40.0
+depends-on R/4.4
