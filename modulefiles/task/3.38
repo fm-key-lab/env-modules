@@ -20,6 +20,7 @@ if { $basedir eq "" } {
 
 prepend-path PATH "${basedir}/task/3.38.0/bin"
 
+# TODO: changes directory?
 set-function "labtasks" {
     task -t $GROUP_HOME/tools/lab-tasks "$@"
 }
