@@ -1,0 +1,22 @@
+#%Module
+##
+## gh (v2.61.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds gh to your path
+Version: 2.61.0
+"
+}
+
+module-whatis "Adds gh to your path\n"
+module-whatis "Provides: gh <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/gh/2.61.0/gh_2.61.0_linux_amd64/bin/"
