@@ -1,0 +1,53 @@
+#%Module
+##
+## amber (v1.0.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Provides AMBER and accompanying python virtual environment.
+Version v1.0.0
+"
+}
+
+module-whatis "Enter 'amber' python venv\n"
+module-whatis "Provides: ... <-- should edit to list libraries"
+
+conflict anaconda
+conflict python
+conflict micromamba
+
+set groupdir [getenv "GROUP_HOME"]
+if { $groupdir eq "" } {
+    puts stderr "Error: GROUP_HOME environment variable is not set."
+    exit 1
+}
+
+# set venv "${groupdir}/envs/venv/amber/.venv"
+
+set basedir [getenv "MODULE_BASEDIR"]
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+# NOTE: For virtual env
+set venv "${groupdir}/opt/amber/1.0.0/.venv"
+prepend-path            PATH                        "${venv}/bin"
+
+# NOTE: For source scripts
+prepend-path            PATH                        "${basedir}/amber/1.0.0/AMBER"
+
+# setenv --set-if-undef   PS1                         "(amber) $env(PS1)"
+setenv --set-if-undef   VIRTUAL_ENV                 "${venv}"
+setenv                  VIRTUAL_ENV_DISABLE_PROMPT  1
+
+depends-on uv
+
+if {[module-info mode unload]} {
+    remove-path PATH "${venv}/bin"
+    unsetenv PS1
+    unsetenv VIRTUAL_ENV
+    unsetenv VIRTUAL_ENV_DISABLE_PROMPT
+}
+
+# TODO: Filter out "SyntaxWarning: invalid escape sequence '\d'" from stdout
