@@ -20,7 +20,10 @@ if { $basedir eq "" } {
     exit 1
 }
 
-depends-on anaconda/3/2023.03
-depends-on R/4.4
+depends-on r_anaconda/3.6.1
+# depends-on R/4.4
 
-setenv R_LIBS_SITE "${basedir}/opt/ggtree/3.19/R_libs"
+# R>=4
+setenv R_LIBS       "${basedir}/ggtree/3.19/R_libs"
+# R<4
+setenv R_LIBS_SITE  "${basedir}/ggtree/3.19/R_libs"
