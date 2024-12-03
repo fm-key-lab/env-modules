@@ -1,0 +1,29 @@
+#%Module
+##
+## nextflow (v24.04.4)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds nextflow to your path
+Version: 24.04.4
+"
+}
+
+module-whatis "Adds nextflow to your path\n"
+module-whatis "Provides: nextflow <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/nextflow/24.04.4/"
+depends-on jdk/17.0.10
+setenv --set-if-undef NFCORE_NO_VERSION_CHECK 1
+
+setenv NXF_VER "24.04.4"
+setenv --set-if-undef NXF_OFFLINE false
+setenv --set-if-undef NXF_OPTS "-Xms1g -Xmx4g"
+setenv --set-if-undef NXF_SINGULARITY_CACHEDIR /ptmp/$env(USER)
