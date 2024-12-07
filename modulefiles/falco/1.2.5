@@ -1,0 +1,22 @@
+#%Module
+##
+## falco (v1.2.5)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds falco to your path
+Version: 1.2.5
+"
+}
+
+module-whatis "Adds falco to your path\n"
+module-whatis "Provides: falco <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/falco/1.2.5/falco-1.2.5/"
