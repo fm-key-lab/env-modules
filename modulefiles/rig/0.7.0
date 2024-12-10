@@ -1,0 +1,22 @@
+#%Module
+##
+## rig (v0.7.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds rig to your path
+Version: 0.7.0
+"
+}
+
+module-whatis "Adds rig to your path\n"
+module-whatis "Provides: rig <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/rig/0.7.0/bin/"
