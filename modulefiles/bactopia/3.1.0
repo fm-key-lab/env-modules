@@ -1,0 +1,23 @@
+#%Module
+##
+## bactopia (v3.1.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds bactopia to your path
+Version: 3.1.0
+"
+}
+
+module-whatis "Adds bactopia to your path\n"
+module-whatis "Provides: bactopia <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/bactopia/3.1.0/bin/"
+depends-on nextflow/24.04.4
