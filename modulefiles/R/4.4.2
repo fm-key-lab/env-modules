@@ -1,0 +1,24 @@
+#%Module
+##
+## R (v4.4.2)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds R to your path
+Version: 4.4.2
+"
+}
+
+module-whatis "Adds R to your path\n"
+module-whatis "Provides: R <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/R/4.4.2/R-4.4.2/bin/"
+depends-on jdk/21
+depends-on mkl/2025.0
