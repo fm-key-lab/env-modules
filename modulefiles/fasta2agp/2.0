@@ -1,0 +1,28 @@
+#%Module
+##
+## fasta2agp (v2.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds fasta2agp to your path
+Version: 2.0
+"
+}
+
+module-whatis "Adds fasta2agp to your path\n"
+module-whatis "Provides: fasta2agp <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/fasta2agp/2.0/FASTA2AGP-2.0/src/"
+depends-on jdk/21
+
+set-function FASTA2AGP {
+    java -jar $GROUP_HOME/opt/fasta2agp/2.0/FASTA2AGP-2.0/src/FASTA2AGP.jar "$@"
+}
+
