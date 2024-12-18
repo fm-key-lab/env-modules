@@ -1,0 +1,28 @@
+#%Module
+##
+## alienremover (v1.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds alienremover to your path
+Version: 1.0
+"
+}
+
+module-whatis "Adds alienremover to your path\n"
+module-whatis "Provides: alienremover <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/alienremover/1.0/AlienRemover-1.0/src/"
+depends-on jdk/21
+
+set-function AlienRemover {
+    java -jar $GROUP_HOME/opt/alienremover/1.0/AlienRemover-1.0/src/AlienRemover.jar "$@"
+}
+
