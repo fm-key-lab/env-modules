@@ -1,0 +1,22 @@
+#%Module
+##
+## contig_info (v2.01)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds contig_info to your path
+Version: 2.01
+"
+}
+
+module-whatis "Adds contig_info to your path\n"
+module-whatis "Provides: contig_info <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/contig_info/2.01/contig_info-2.01/"
