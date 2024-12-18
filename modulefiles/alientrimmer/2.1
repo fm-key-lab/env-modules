@@ -1,0 +1,28 @@
+#%Module
+##
+## alientrimmer (v2.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds alientrimmer to your path
+Version: 2.1
+"
+}
+
+module-whatis "Adds alientrimmer to your path\n"
+module-whatis "Provides: alientrimmer <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/alientrimmer/2.1/AlienTrimmer-2.1/src/"
+depends-on jdk/21
+
+set-function AlienTrimmer {
+    java -jar $GROUP_HOME/opt/alientrimmer/2.1/AlienTrimmer-2.1/src/AlienTrimmer.jar "$@"
+}
+
