@@ -1,0 +1,28 @@
+#%Module
+##
+## aliendiscover (v0.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds aliendiscover to your path
+Version: 0.1
+"
+}
+
+module-whatis "Adds aliendiscover to your path\n"
+module-whatis "Provides: aliendiscover <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/aliendiscover/0.1/AlienDiscover-0.1/src/"
+depends-on jdk/21
+
+set-function AlienDiscover {
+    java -jar $GROUP_HOME/opt/aliendiscover/0.1/AlienDiscover-0.1/src/AlienDiscover.jar "$@"
+}
+
