@@ -1,0 +1,31 @@
+#%Module
+##
+## multivcfanalyzer (v0.85.2)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds multivcfanalyzer to your path
+Version: 0.85.2
+"
+}
+
+module-whatis "Adds multivcfanalyzer to your path\n"
+module-whatis "Provides: multivcfanalyzer <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/multivcfanalyzer/0.85.2/"
+
+depends-on jdk/21
+
+setenv --set-if-undef JVM_MEM "-Xmx1g"
+
+set-function MultiVCFAnalyzer {
+    java $JVM_MEM -jar $GROUP_HOME/opt/multivcfanalyzer/0.85.2/MultiVCFAnalyzer-0.85.2.jar "$@"
+}
+
