@@ -1,0 +1,26 @@
+#%Module
+##
+## nf-core (v3.1.1)
+
+proc ModulesHelp { } {
+   puts stderr "
+Adds nf-core to your path
+Version: 3.1.1
+"
+}
+
+module-whatis "Adds nf-core to your path\n"
+module-whatis "Provides: nf-core <-- should edit to list executables"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+prepend-path PATH "${basedir}/nf-core/3.1.1/.venv/bin/"
+
+depends-on apptainer/1.3.2
+depends-on nextflow/24.10
+depends-on jdk/21
