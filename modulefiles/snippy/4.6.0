@@ -19,4 +19,56 @@ if { $basedir eq "" } {
     puts stderr "Error: MODULE_BASEDIR environment variable is not set."
     exit 1
 }
-prepend-path PATH "${basedir}/snippy/4.6.0/snippy-4.6.0/bin/"
+# prepend-path PATH "${basedir}/snippy/4.6.0/snippy-4.6.0/bin/"
+
+depends-on apptainer/1.3.2
+
+set-function snippy {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/snippy.sif \
+      snippy \
+      "$@"
+}
+
+set-function "snippy-multi" {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/snippy.sif \
+      snippy-multi \
+      "$@"
+}
+
+set-function "snippy-core" {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/snippy.sif \
+      snippy-core \
+      "$@"
+}
+
+set-function "snippy-vcf_report" {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/snippy.sif \
+      snippy-vcf_report \
+      "$@"
+}
+
+set-function "snippy-clean_full_aln" {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/snippy.sif \
+      snippy-clean_full_aln \
+      "$@"
+}

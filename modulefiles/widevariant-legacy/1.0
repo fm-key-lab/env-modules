@@ -1,0 +1,83 @@
+#%Module
+##
+## WideVariant (legacy) (v1.0)
+
+proc ModulesHelp { } {
+   puts stderr "
+Add tools for running WideVariant (legacy) to your path
+Version: 1.0
+"
+}
+
+module-whatis "Adds WideVariant (legacy) tools to your path\n"
+module-whatis "Provides: samtools, bowtie2"
+
+set basedir [getenv "MODULE_BASEDIR"]
+
+# TODO: Should be `$basedir`
+if { $basedir eq "" } {
+    puts stderr "Error: MODULE_BASEDIR environment variable is not set."
+    exit 1
+}
+
+depends-on apptainer/1.3.2
+
+set-function fastqc {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/fastqc.sif \
+      fastqc \
+      "$@"
+}
+
+set-function bcftools {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/widevariant.sif \
+      bcftools \
+      "$@"
+}
+
+set-function tabix {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/widevariant.sif \
+      tabix \
+      "$@"
+}
+
+set-function samtools {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/widevariant.sif \
+      samtools \
+      "$@"
+}
+
+set-function bowtie2 {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/widevariant.sif \
+      bowtie2 \
+      "$@"
+}
+
+set-function picard {
+    apptainer \
+      --quiet exec \
+      --home $PWD \
+      --bind /ptmp,/u,/nexus \
+      $GROUP_HOME/containers/picard.sif \
+      picard \
+      "$@"
+}
